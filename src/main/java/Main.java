@@ -6,6 +6,7 @@ import models.Node;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 public class Main {
@@ -16,6 +17,11 @@ public class Main {
      * Per verificare che il programma funzioni , recupera il file che contiene i logs e verifica che nella stampa del programma
      * dentro ogni blocco in pos 2^x ci siao tutti i logs dalla posizione (2^x-1)+1 alla posizione (2^x-1)
      * Controllare screen mandato e file
+     *
+     * Struttura Lista:
+     * La struttura della lista e' leggermente diversa da quella pre stabilita
+     * partendo da 2^0, 2^1, 2^2 ...  abbiamo due blocchi, il numero 1 e numero 2 con un solo logs
+     *
      */
 
     static int NUMBER_BLOCKS = 128; //8192
@@ -28,7 +34,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         System.out.println("***START***");
 
-        //Program Data ---------------------------------------------//
+        //Program Data -----------------------------------------------//
 
         ArrayList<Node> nodeList = new ArrayList<>();
         ArrayList<Integer> listaPow = new ArrayList<>();
@@ -85,9 +91,24 @@ public class Main {
         }
 
         //Vado a verificare che i nodi flaggati contengano la lista dei logsBloom dei nodi precedenti fino alla posizine richieste
+
+        /*
         for(int j = 0; j < nodeList.size(); j++){
             nodeList.get(j).printLogsDone();
+        }*/
+
+
+        for(int j = 0; j < nodeList.size(); j++){
+            nodeList.get(j).doOrBitwiseToLogsBloom2();
         }
+
+
+        /*
+        for(int j = 0; j < nodeList.size(); j++){
+            nodeList.get(j).printLogsOrBitted();
+        }*/
+
+
 
 
     }
